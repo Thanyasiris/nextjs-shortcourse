@@ -4,14 +4,14 @@ import { NextPage } from "next"
 import Image from "next/image"
 
 async function getAllAnime(){
-    return await axios.get("https://api.jikan.moe/v4/anime?q=spy")
+    return await axios.get("https://api.jikan.moe/v4/anime")
 }
 
 const AnimePage: NextPage = () => {
     const query = useQuery({queryKey: ['all-anime'], queryFn: getAllAnime})
     return (
         <>
-            {query.map((item)=>(
+            {query.data?.data.data.map((item:any)=>(
                 <div key={item.mal_id}>
                     <div>{item.titles[0].title}</div>
                     <Image 
