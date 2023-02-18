@@ -11,7 +11,9 @@ const AnimePage: NextPage = () => {
     const query = useQuery({queryKey: ['all-anime'], queryFn: getAllAnime})
     return (
         <>
-            {query.data?.data.data.map((item:any)=>(
+            {query.isFetching && <div>loading...</div>}
+            
+            {query.isSuccess && query.data?.data.data.map((item:any)=>(
                 <div key={item.mal_id}>
                     <div>{item.titles[0].title}</div>
                     <Image 
