@@ -2,18 +2,21 @@ import { GetServerSideProps, NextPage } from "next"
 import Image from "next/image"
 
 interface IAnimePageProps{
-    data:any
+    data:any[]
 }
-const AnimePage: NextPage = ({data}:any) => {
+const AnimePage: NextPage<IAnimePageProps> = ({data}) => {
     return <>
-        <div>
         {data.map((item) => (
-            <>
-                <div /*key={word}*/>{item.mal_id}</div>
-                <Image src={item.images.jpg.large_image_url} alt={''} width={200} height={300}/>
-            </>
+            <div key={item.mal_id}>
+                <div>{item.titles[0].title}</div>
+                <Image 
+                    src={item.images.jpg.large_image_url} 
+                    alt={''} 
+                    width={200} 
+                    height={300}
+                />
+            </div>
         ))}
-      </div>
     </>
 }
 export default AnimePage
